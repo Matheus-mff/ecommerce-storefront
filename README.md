@@ -16,6 +16,22 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Demo product API
+
+The storefront uses Next.js Route Handlers for its demo API:
+
+- `GET /api/products` returns the mock catalog.
+- `GET /api/products/:slug` returns a product, or a JSON 404 for an unknown slug.
+
+Both routes read `src/mocks/data/mock-products.ts` in development and production.
+They require a Next.js server deployment and do not use a browser service worker.
+MSW handlers remain available for future tests, but MSW is not started by the app.
+`NEXT_PUBLIC_API_MOCKING` is not used by these routes.
+
+If you previously ran the MSW version, close all localhost app tabs and reopen the
+site. If an old worker persists, unregister `mockServiceWorker.js` in Chrome
+DevTools under Application > Service Workers, then reload.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
