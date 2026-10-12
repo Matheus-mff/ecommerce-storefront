@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { TanStackQueryProvider } from "@/components/providers/tanstack-query-provider";
+import { CartProvider } from "@/features/cart/context/cart-context";
+import { OrderProvider } from "@/features/orders/context/order-context";
+import { WishlistProvider } from "@/features/wishlist/context/wishlist-context";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,10 +33,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body>
+      <body className="flex min-h-screen flex-col">
         <TanStackQueryProvider>
-          <SiteHeader />
-          <main>{children}</main>
+          <CartProvider>
+            <WishlistProvider>
+              <OrderProvider>
+                <SiteHeader />
+
+                <main className="flex-1">{children}</main>
+
+                <SiteFooter />
+              </OrderProvider>
+            </WishlistProvider>
+          </CartProvider>
         </TanStackQueryProvider>
       </body>
     </html>

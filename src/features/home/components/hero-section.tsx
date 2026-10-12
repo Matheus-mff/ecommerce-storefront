@@ -29,7 +29,7 @@ export function HeroSection() {
             </Link>
 
             <Link
-              href="/category/keyboards"
+              href="/products?category=keyboards"
               className="inline-flex items-center rounded-md border border-zinc-700 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-900"
             >
               Explore keyboards

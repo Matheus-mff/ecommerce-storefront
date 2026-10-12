@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useProducts } from "@/features/products/hooks/use-products";
 import { ProductCard } from "@/features/products/components/product-card";
+import { ProductGridSkeleton } from "@/features/products/components/product-grid-skeleton";
+import { useProducts } from "@/features/products/hooks/use-products";
 
 export function FeaturedProductsSection() {
   const { data: products, isPending, isError } = useProducts();
@@ -30,9 +31,7 @@ export function FeaturedProductsSection() {
         </Link>
       </div>
 
-      {isPending && (
-        <p className="text-sm text-zinc-500">Loading products...</p>
-      )}
+      {isPending && <ProductGridSkeleton count={3} />}
 
       {isError && (
         <p className="text-sm text-red-600">Unable to load products.</p>
